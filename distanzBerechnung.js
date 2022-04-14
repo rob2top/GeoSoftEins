@@ -33,7 +33,7 @@ function fuelleArray()
     for (let i = 0; i < cities.length; i++) // schleife läuft durch, bis alle Koordinaten aus "cities.js" mit "point.js" geschnitten wurden
     {
         const cityPackage= []   // erstellt ein leeres Array, in dem die Distanz und der Stadtname als "Päckchen" gespeichert werden sollen
-        cityPackage.push(distance(point[1], point[0], cities[i][0][1], cities[i][0][0])); // führt die Distanzberechnung durch und speichert die Distanz direkt in dem Array
+        cityPackage.push(distance(point[0], point[1], cities[i][0][0], cities[i][0][1])); // führt die Distanzberechnung durch und speichert die Distanz direkt in dem Array
         cityPackage.push(cities[i][1]);     //Speichert den Namen der Stadt als zweites Element in das "Päckchen"-Array        
         cityDistance.push(cityPackage);     //Speichert das "Päckchen"-Array als ein Element in das Gesamt Array, um die Distanz und den Stadtnamen beisammen abrufen zu können
     }
@@ -45,22 +45,22 @@ function sortiere() //Sortiert das Array nach dem SelectionSort verfahren
     for(let i = 0; i < n ; i++)     
     {
 
-       let min = i;
+       let min = i;         //variable speichert den kleinsten gefundenen Wert
        for(let j = i+1; j < n; j++)
        {
-           if(cityDistance[j][0] < cityDistance[min][0])
+           if(cityDistance[j][0] < cityDistance[min][0]) //prüft ob die aktuelle Distanz kleiner ist als das aktuelle Minimum
            {
-               min = j;
+               min = j; //setzt das aktuelle Minimum auf die aktuelle Distanz 
            }
        }
-       if(min!= i)
+       if(min!= i)      //wenn die kleinste Zahl nicht die aktuelle und vorne stehende ist, wird die aktuelle Zahl mit der niedrigsten getauscht
        {
-           let tmp = cityDistance[i];
-           cityDistance[i] = cityDistance[min];
-           cityDistance[min] = tmp;
+           let tmp = cityDistance[i];            //aktuelle Distanz wird zwischengespeichert
+           cityDistance[i] = cityDistance[min];  //Aktuelle Distanz wird mit niedrigster Distanz ersetzt
+           cityDistance[min] = tmp;              //minimale Distanz wird mit aktueller Distanz ersetzt --> im endeffekt wird die minimale Distanz nach vorne durch getauscht
        }
     }
-    return cityDistance;
+    return cityDistance;        //sortiertes Array wird ausgegeben
 }
 
 
