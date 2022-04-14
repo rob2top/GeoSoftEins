@@ -1,12 +1,11 @@
 
 
-var cityDistance = [];
+var cityDistance = [];      //erstellt ein leeres Array in dem die Distanzen und Städtenamen sortiert gespeichert werden sollen
 fuelleArray(); // füllt das Array "cityDistance" mit den Distanzen der Städte zu Münster
 sortiere(); //sortiert das Array mit einer selectionSort Methode, sodass die geringste Strecke vorne steht
 document.body.innerHTML = document.body.innerHTML + makeTableHTML(cityDistance); // Bringt das Ergebnis als Tabelle ins HTML Dokument
 
 
-window.alert(cityDistance.join(" ; \n"));
 
 
 function distance(lon1, lat1, lon2, lat2) // berechnet die Distanz zwischen einer Koordinate zu einer Anderen 
