@@ -39,7 +39,7 @@ function fuelleArray()
     }
 } 
 
-function sortiere() //Sortiert das Array nach dem SelectionSort verfahren
+function sortiere() //Sortiert das Array nach dem SelectionSort verfahren , SelectionSort ist nur nötig, da die array.sort function nicht funktioniert, aufgrund der ergänzten Städtenamen in der cities.js
 {
     let n = cityDistance.length;    //iterationsvariable = die länge des Arrays
     for(let i = 0; i < n ; i++)     
