@@ -16,9 +16,70 @@
 
 <body>
   <h2>Berechnung der Entfernung von <i>Münster (GEO1)</i> zur Liste von Orten</h2>
+    <br> 
 
+    <table border="2">
+        <tr> 
+            <td>dein Wunschstandpunkt:</td>
+            <td> 
+                <table>
+                        <tr>
+                            <th>
+                                lon
+                            </th>
+                            <th>
+                                lat
+                            </th>
+                        </TR>
+                        <tr>
+                            <td>
+                                <input type="text" id="text_lon" >
+                            </td>
+                            <td>
+                                <input type="text" id="text_lat" >
+                            </td>
+                        </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                Eingabe als GeoJSON <BR>
+                <textarea id="eingabe_geoJSON" rows="12" cols="50" >
+                </textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" id="button_standort">Standort abfragen</button>
+            </td>
+            <td>
+                <button type="submit" id="button_berechne">berechne</button>
+                <button type="submit" id="button_berechne_geoJSON">berechne geoJSON</button>
+                <button type="submit" id="button_aufgabe1">Aufgabe 1</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1">
+                <button type="button" id="button_clear">Clear all</button>
+            </td>
+            <td>
+                <button type="button" id="button_titel">Seitentitel setzen</button>
+                <button type="button" id="button_author">Autor setzen</button>
+                <button type="button" id="button_description">Beschreibung setzen</button>
+            </td>
+
+            
+        </tr>
+
+    </table>
+    <br>
+    <div id="whereTheMagicHappens">
+
+    </div>
   <script defer src="cities.js"></script>
   <script defer src="point.js"></script>
+  <script defer src="poi.js"></script>
   <script defer src="distanzBerechnung.js"></script> 
 
 
