@@ -152,10 +152,10 @@ function leseGEOJSON ()
  */
 function distance(lon1, lat1, lon2, lat2) // berechnet die Distanz zwischen einer Koordinate zu einer Anderen 
 {
-    const R = 6371e3; // metres
-    const φ1 = lat1 * Math.PI/180; // φ, λ in radians
+    const R = 6371e3; // Radius der Erde in Metern
+    const φ1 = lat1 * Math.PI/180; // φ, λ in Radiant umgerechnet
     const φ2 = lat2 * Math.PI/180;
-    const Δφ = (lat2-lat1)* Math.PI/180;
+    const Δφ = (lat2-lat1)* Math.PI/180;    
     const Δλ = (lon2-lon1)* Math.PI/180;
 
     const a =  Math.sin(Δφ/2) * Math.sin(Δφ/2) +
@@ -165,7 +165,7 @@ function distance(lon1, lat1, lon2, lat2) // berechnet die Distanz zwischen eine
 
     const d = R * c /1000; // schreibt die Distanz in Metern auf Kilometer um
       
-    return d;
+    return d;  // die Distanz in Kilometern wird ausgeben
 }  
 
 /**
@@ -179,10 +179,10 @@ function fuelleArray(home, destination, result)
 {
     for (let i = 0; i < destination.length; i++) // schleife läuft durch, alle Koordinaten aus "cities.js" mit "point.js" geschnitten wurden
     {
-        const coordinatePackage= []
-        coordinatePackage.push(distance(home[0], home[1], destination[i][0][0], destination[i][0][1]));
-        coordinatePackage.push(destination[i][1]);        
-        result.push(coordinatePackage);
+        const coordinatePackage= [] // erstellt ein leeres Array, in dem die Distanz und der Stadtname als "Päckchen" gespeichert werden sollen
+        coordinatePackage.push(distance(home[0], home[1], destination[i][0][0], destination[i][0][1]));  // führt die Distanzberechnung durch und speichert die Distanz direkt in dem Array
+        coordinatePackage.push(destination[i][1]);  //Speichert den Namen der Stadt als zweites Element in das "Päckchen"-Array      
+        result.push(coordinatePackage);     //Speichert das "Päckchen"-Array als ein Element in das Gesamt Array, um die Distanz und den Stadtnamen beisammen abrufen zu können
     }
 return result;
 }
@@ -192,28 +192,28 @@ return result;
  * @param {Array} myArray Array [number, String]
  * @returns sortiertes Array
  */
-function sortiere(myArray) //selectionSort
+function sortiere(myArray) //selectionSort, Sortiert das Array nach dem SelectionSort verfahren , SelectionSort ist nur nötig, da die array.sort function nicht funktioniert, aufgrund der ergänzten Städtenamen in der cities.js
 {
-    let n = myArray.length;
+    let n = myArray.length;  //Iterationsvariable = die Länge des Arrays
     for(let i = 0; i < n ; i++)
     {
 
-       let min = i;
+       let min = i;         //variable speichert den kleinsten gefundenen Wert
        for(let j = i+1; j < n; j++)
        {
-           if(myArray[j][0] < myArray[min][0])
+           if(myArray[j][0] < myArray[min][0]) //prüft ob die aktuelle Distanz kleiner ist als das aktuelle Minimum
            {
-               min = j;
+               min = j; //setzt das aktuelle Minimum auf die aktuelle Distanz 
            }
        }
-       if(min!= i)
+       if(min!= i)      //wenn die kleinste Zahl nicht die aktuelle und vorne stehende ist, wird die aktuelle Zahl mit der niedrigsten getauscht
        {
-           let tmp = myArray[i];
-           myArray[i] = myArray[min];
-           myArray[min] = tmp;
+           let tmp = myArray[i];           //aktuelle Distanz wird zwischengespeichert
+           myArray[i] = myArray[min];      //aktuelle Distanz wird mit niedrigster Distanz ersetzt
+           myArray[min] = tmp;              //minimale Distanz wird mit aktueller Distanz ersetzt --> im endeffekt wird ei minimale distanz nach vorne durch getauscht
        }
     }
-    return myArray;
+    return myArray;     //sortiertes Array wird ausgegeben
 }
 
 /**
@@ -221,19 +221,19 @@ function sortiere(myArray) //selectionSort
  * @param {Array} myArray Array [number, String]
  * @returns HTML Tabelle mit Array als Inhalt
  */
-function makeTableHTML(myArray) {
-var result = "\n <table border=1> ";
-result += "<tr> <th> Distanz (in Kilometer) </th><th> Vergleichspunkt</th> </tr> <tr> <th>dein Standpunkt:</th><th>"+stand_lat+" , "+stand_lon+"</th></tr>";
-for(var i=0; i<myArray.length; i++) {
-    result += "<tr>";
-    for(var j=0; j<myArray[i].length; j++){
-        result += "<td>"+myArray[i][j]+"</td>";
+function makeTableHTML(myArray) {    //nimmt ein Array als Parameter entgegen und trägt die einzelnen Array Elemente als einzelne Zellen in eine HTML Tabelle ein
+var result = "\n <table border=1> ";    // definiere zunächst eine Variable, welche am ende den ganzen Code für die zu erstellende Tabelle enthält
+result += "<tr> <th> Distanz (in Kilometer) </th><th> Vergleichspunkt</th> </tr> <tr> <th>dein Standpunkt:</th><th>"+stand_lat+" , "+stand_lon+"</th></tr>"; // variable wird mit der Kopfzeile der Tabelle gefüllt
+for(var i=0; i<myArray.length; i++) {       //schleife iteriert durch die länge des Arrays
+    result += "<tr>";                       // bei jedem Schleifendurchlauf wird eine neue Zeile der Tabelle in das  Ergebnis geschrieben
+    for(var j=0; j<myArray[i].length; j++){ //Innerere Schleife iteriert ebenso über die länge des Arrays
+        result += "<td>"+myArray[i][j]+"</td>";    //Bei jedem inneren Schleifendurchlauf wird für jedes "innere" Arrayelement eine Zelle der Tabelle beschrieben in den Resulsstring
     }
-    result += "</tr>";
+    result += "</tr>";                      
 }
 result += "</table> ";
 
-return result;
+return result;      //fertige Tabelle wird als string zurückgegeben
 }
 
 

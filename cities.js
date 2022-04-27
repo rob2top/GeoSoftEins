@@ -1,4 +1,4 @@
-var cities = [
+var cities = [      // Array um Städtenamen als Element ergänzt um die Städtenamen direkt in die Tabelle zu printen
   [[6.9570, 50.9367], "Köln"], //Köln
   [[4.9041, 52.3676],"Amsterdam"], //Amsterdam
   [[9.4797, 51.3127], "Kassel"], //Kassel
