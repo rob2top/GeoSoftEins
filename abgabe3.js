@@ -103,8 +103,9 @@ function loadAktuelleBH()
         if(this.readyState == 4 && this.status == 200)
         {
             let res = JSON.parse(this.responseText);
-              
+           if(res.length != 0){   
             showAktuelleBH(res);
+           }
            console.log(res);
         }
     }
