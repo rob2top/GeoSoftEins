@@ -1,19 +1,28 @@
 "use strict"
-var arrayAlleBushaltestellen = [];
-var arrayBushalteDistanz =[];
-var arrayAktuelleBH = [];
-var headerBHList = "<TR> <TH> Distanz</TH> <TH> Haltestelle</TH></TR>";
-var tabelleAbfahrt;
-var tabelleBushalte;
+var arrayAlleBushaltestellen = []; //Array um alle Bushaltestellen - OBjekte abzuspeichern
+var arrayBushalteDistanz =[]; //Array berechneter Distanz, Haltestellenname + richtung , ID
+var arrayAktuelleBH = [];   // Array für die Abfahrtzeiten an der nähesten Bushaltestelle 
+var headerBHList = "<TR> <TH> Distanz</TH> <TH> Haltestelle</TH></TR>"; //Kopfzeile für die Bushaltestellen Tabelle
+var tabelleAbfahrt; // variable für die Abfahrtszeitentabelle
+var tabelleBushalte;    // variable für die Bushaltestellentabelle
 
-
-document.getElementById("button_bushalte").addEventListener("click", ()=> uebung3());
+/**
+ * Funktion, es ist notwendig zuerst den Standort über den Knopf "Standort abfragen" abzufragen, 
+ * - dann die Bushaltestellen Objekte zu erzeugen ("Bushaltestellen abfragen")
+ * - dann die Abfahrtszeiten Laden
+ * - am ende den PRINT button drücken
+ * Ein wenig zeit vergehen lassen zwischen den Knöpfen
+ * 
+ * Eventhandler für die Knöpfe Bushaltestellen laden, Abfahrtzeiten laden, und final zum Printen der Tabelle
+*/
+document.getElementById("button_bushalte").addEventListener("click", ()=> loadNearbyBushalte());
 document.getElementById("button_abfahrten").addEventListener("click", ()=> loadAktuelleBH());
-
-
 document.getElementById("button_bushalte_print").addEventListener("click", ()=>  document.getElementById("whereTheMagicHappens").innerHTML = printAufgabe3());
 
-
+/**
+ * führt die Übung 3 aus, 
+ * Standpunkt wird aus den globalen koordinaten in ein Array gepackt um direkt weiter zu nutzen 
+ 
 function uebung3()
 {
 
@@ -25,10 +34,13 @@ function uebung3()
    // loadAktuelleBH();
     console.log("[Übung3] fertig.");
 
-}
+}*/
 
 
-
+/**
+ * führt printAbfahrten() aus führt Strings von Abfahrten und Haltestellen zusammen
+ * @returns String der die ausgabe für die beiden Tabellen Speichert wird ausgegeben
+ */
 function printAufgabe3()
 {
     printAbfahrten();
@@ -43,7 +55,9 @@ function printAufgabe3()
 }
 
 
-
+/**
+ * Funktion lädt über XHR Protokoll die Bushaltestellen vom Busradar von Conterra gibt den String an die Show Funktion weiter
+ */
 function loadNearbyBushalte()
 {
     console.log("[loadBushalte] anfang.");
@@ -64,6 +78,14 @@ function loadNearbyBushalte()
 
 }
 
+/**
+ * übernimmt das undifferenzierte Array an Objekten, erstellt neue Objekte der Klasse Bushaltestelle mit den Elementen aus dem übergebenem Array
+ * For Schleife iteriert durch alle Elemente von nbbushalte, erzeugt bei jedem durchlauf ein Objekt von Bushaltestelle.js
+ * - hängt alle Objekte an das Array "arrayAlleBushaltestellen"
+ * - packt päckchen mit Distanz (berechnet aus methode der jedes Objektes), Name der Bushalte + Fahrtrichtung, und ID der Bushalte
+ * - Packt das ganze Päckchen auf das Array "arrayBushalteDistanz"
+ * @param {Array} nbbushalte 
+ */
 function showNearbyBushalte(nbbushalte)
 {
     console.log(nbbushalte);
@@ -82,19 +104,24 @@ function showNearbyBushalte(nbbushalte)
     console.log("[showBushalte] fertig.");
 }
 
-
+/**
+ *  Baut den Ausgabestring für die Abfahrzeiten Tabelle zusammen 
+ */
 function printAbfahrten()
 {
     console.log("[printAbfahrten] anfang.");
     let res = "<table border= 1 vertical-align=top>";
-    res += "<TR><TH colspan = 3 >Bushaltestelle: "+arrayBushalteDistanz[0][1] +"</TH></TR>";
-    let headerBH = "<TR> <TH> Linie </TH><TH> Richtung </TH> <TH> Abfahrt in</TH></TR>";
-    res += "<TR><TD colspan = 3>"+ makeTableHTML(arrayAktuelleBH, headerBH ,3)+"</TD></TR>";
+    res += "<TR><TH colspan = 3 >Bushaltestelle: "+arrayBushalteDistanz[0][1] +"</TH></TR>"; //erste Überschrift mit betreffender Bushaltestelle
+    let headerBH = "<TR> <TH> Linie </TH><TH> Richtung </TH> <TH> Abfahrt um</TH></TR>"; // zweite Überschrift 
+    res += "<TR><TD colspan = 3>"+ makeTableHTML(arrayAktuelleBH, headerBH ,3)+"</TD></TR>"; //erzeugt Tabelle mit Abfahrtzeiten
     res += "</table>";
     console.log("[printAbfahrten] fertig.");
     tabelleAbfahrt = res;
 }
 
+/**
+ * Lädt die abfahrtszeiten der nähesten Haltestelle über das XHR Tool
+ */
 function loadAktuelleBH()
 {
     let xhttp = new XMLHttpRequest()
@@ -103,17 +130,24 @@ function loadAktuelleBH()
         if(this.readyState == 4 && this.status == 200)
         {
             let res = JSON.parse(this.responseText);
-           if(res.length != 0){   
+           if(res.length != 0){    //prüft ob Array Leer ist bevor es weitergegeben wird 
             showAktuelleBH(res);
            }
            console.log(res);
         }
     }
-    xhttp.open("GET", "https://rest.busradar.conterra.de/prod/haltestellen/"+arrayBushalteDistanz[0][2]+"/abfahrten?sekunden=300", true);
+    xhttp.open("GET", "https://rest.busradar.conterra.de/prod/haltestellen/"+arrayBushalteDistanz[0][2]+"/abfahrten?sekunden=300", true); //get request modular mit oberstem Element des Bushaltestellen Arrays und da direkt die ID der BH
     xhttp.send();
 
 }
 
+
+/**
+ * übersetzt den Unix Zeitstempel in ein Zeitstempel im Format HH:MM:SS
+ * kopiert von Stackoverflow
+ * @param unix Zeitstempel im unix format
+ * @returns    Zeitstempel im HH:MM:SS Format
+ */
 function unixINTOdate(unix)
 {
     let unix_timestamp = unix
@@ -132,6 +166,13 @@ function unixINTOdate(unix)
     return formattedTime;
 }
 
+/**
+ * erstellt Array aus den geladenen Abfahrzeiten 
+ * For Schleife: 
+ * - Päckchen mit Liniennummer, Richtungsangabe , Abfahrtzeit
+ * prüft vorher ob das übergebene Array leer ist 
+ * @param {Array} akBH 
+ */
 function showAktuelleBH(akBH)
 {
     console.log("[showAktuelle] anfang.");
