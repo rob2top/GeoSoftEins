@@ -10,15 +10,34 @@
   <meta name="author" content="Robert Schmitz, mit tz wie Tür zu.">
 
   <link rel="stylesheet" href="style.css">
-
   
+ <!--Leaflet Karten einbindung-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="crossorigin=""></script>
+
+  <!--Leaflet draw einbindung-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+ 
+  <!-- Turf.js einbinden-->
+  <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
 </head>
 
 <body>
   <h2>Geosoftware Abgabe von  <i>Robert Schmitz</i> - Kurs SoSe 2022</h2>
     <br> 
+  <script async src="cities.js"></script>
+  <script async src="point.js"></script>
+  <script async src="poi.js"></script>
+  <script async src="bushaltestelle.js"></script>
+  <script async src="abgabe1.js"></script>
+  <script async src="abgabe2.js"></script>
+  <script async src="abgabe3.js"></script>
+  <script async src="abgabe4.js"></script>
 
-    <table border="2">
+    
+  <div id="tabelle">  
+  <table border="2" id="innerTable">
         <tr> 
             <td>dein Wunschstandpunkt:</td>
             <td> 
@@ -45,7 +64,7 @@
         <tr>
             <td colspan="2">
                 Eingabe als GeoJSON <BR>
-                <textarea id="eingabe_geoJSON" rows="12" cols="50" >
+                <textarea id="eingabe_geoJSON" rows="6" cols="50" >
                 </textarea>
             </td>
         </tr>
@@ -88,20 +107,29 @@
             </td>
   
         </tr>
+        <tr>
+            <td colspan ="2"> Abgabe 4: <BR> 1. Standort abfragen <BR> 2. Polygon Zeichnen <BR> 3. "Haltestellen in box" drücken um auf Haltestellen zu reduzieren </td>
+        </tr>
+        <tr>
+         <td colspan="2">
+             <button type="button" id="button_boundingbox">Bushaltestellen im Umkreis von:</button><input type="text" id="eingabe_Radius" >
+             <button type="button" id="button_isInBox">Haltestellen in Box</button>
+        </td>
+        </tr>
 
 
-    </table>
+    </table> 
+</div>
+    
+    <div id="map">
+
+           
+    </div>
     <br>
     <div id="whereTheMagicHappens">
 
     </div>
-  <script defer src="cities.js"></script>
-  <script defer src="point.js"></script>
-  <script defer src="poi.js"></script>
-  <script defer src="bushaltestelle.js"></script>
-  <script defer src="abgabe1.js"></script>
-  <script defer src="abgabe2.js"></script>
-  <script defer src="abgabe3.js"></script>
+  
 
 
 </body>

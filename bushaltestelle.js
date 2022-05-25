@@ -10,6 +10,7 @@ class Bushaltestelle{
         this.name = name;
         this.richtung = richtung;
         this.ID = ID;
+
     }
 
     /**

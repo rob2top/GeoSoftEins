@@ -1,0 +1,18 @@
+#map {
+    height: 500px;
+    width: 750px; 
+    float: left;
+    margin-left: 50px;
+    border: 1px solid black;
+}
+
+#tabelle {
+    float: left;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+#body{
+}
+
+#whereTheMagicHappens

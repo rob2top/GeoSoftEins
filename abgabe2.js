@@ -6,7 +6,8 @@ var x_lat = document.getElementById("text_lat"); // Inhalt des longitude Textfel
 var x_lon = document.getElementById("text_lon"); // Inhalt des latitude Textfeldes
 var stand_lat;      //globale lat Koordinate
 var stand_lon;      //globale lon Koordinate
-var x_geoJSON = document.getElementById("eingabe_geoJSON"); //Inhalt des Textareas für geoJSON eingabe
+var x_geoJSON = document.getElementById("eingabe_geoJSON"); //Inhalt des Textareas für geoJSON eingabe7
+var AKstandort = [stand_lat, stand_lon];
 
 /**
  * bei Klick auf den "Berechne" Button, werden die lat und lon Koordinaten für den Startpunkt aus dem Eingabefeld übernommen.
@@ -17,6 +18,7 @@ var x_geoJSON = document.getElementById("eingabe_geoJSON"); //Inhalt des Textare
     stand_lon = x_lon.value;
     uebung2();
 });
+
 
 /**
  * bei Klick auf den "Standort abfragen" Button, wird die Funktion "getLocation" ausgeführt und der Standort des Browsers abgefragt
@@ -77,10 +79,7 @@ document.getElementById("button_clear").addEventListener("click", ()=>{
 function uebung2()
 {
     leseGEOJSON();
-    const standpunkt =[];
-    standpunkt.push(stand_lon);
-    standpunkt.push(stand_lat);
-    fuelleArray(standpunkt, pointsOf, poiDistance, "Meter");
+    fuelleArray(AKstandort, pointsOf, poiDistance, "Meter");
     sortiere(poiDistance);
     let header = "<tr> <th colspan= 2>dein Standpunkt: lat. "+stand_lat+" , lon. "+stand_lon+"</th></tr> <tr> <th> Distanz (in Kilometer) </th><th> Vergleichspunkt</th> </tr> ";
     document.getElementById("whereTheMagicHappens").innerHTML = makeTableHTML(poiDistance, header, 2); // Bringt das Ergebnis als Tabelle ins HTML Dokument
@@ -149,4 +148,5 @@ function uebung2()
     stand_lat = x_lat.value;
     stand_lon = x_lon.value;
     console.log("[Standort] eingetragen");
+    printMap(stand_lat, stand_lon);
   }

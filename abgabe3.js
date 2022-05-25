@@ -94,7 +94,7 @@ function showNearbyBushalte(nbbushalte)
             let myBushalte =  new Bushaltestelle(element.geometry.coordinates[0],element.geometry.coordinates[1],element.properties.lbez, element.properties.richtung, element.properties.nr);
            arrayAlleBushaltestellen.push(myBushalte)
            let distanzPackage =[];
-           distanzPackage.push(myBushalte.distanceBushalte(stand_lon,stand_lat));  
+           distanzPackage.push(myBushalte.distanceBushalte(AKstandort[0],AKstandort[1]));  
            distanzPackage.push(myBushalte.name +", "+ myBushalte.richtung);
            distanzPackage.push(myBushalte.ID);
            arrayBushalteDistanz.push(distanzPackage);
