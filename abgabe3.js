@@ -16,8 +16,8 @@ var tabelleBushalte;    // variable für die Bushaltestellentabelle
  * Eventhandler für die Knöpfe Bushaltestellen laden, Abfahrtzeiten laden, und final zum Printen der Tabelle
 */
 document.getElementById("button_bushalte").addEventListener("click", ()=> loadNearbyBushalte());
-document.getElementById("button_abfahrten").addEventListener("click", ()=> loadAktuelleBH());
-document.getElementById("button_bushalte_print").addEventListener("click", ()=>  document.getElementById("whereTheMagicHappens").innerHTML = printAufgabe3());
+//document.getElementById("button_abfahrten").addEventListener("click", ()=> loadAktuelleBH());
+//document.getElementById("button_bushalte_print").addEventListener("click", ()=>  document.getElementById("whereTheMagicHappens").innerHTML = printAufgabe3());
 
 /**
  * führt die Übung 3 aus, 

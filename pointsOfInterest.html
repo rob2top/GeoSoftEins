@@ -1,0 +1,116 @@
+<!doctype html>
+
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link href="stylePOI.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Rob's GeoSoftware 1</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="index2.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="pointsOfInterest.html">Points of Interest</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Bushaltestellen.html">Bushaltestellen</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <script async src="cities.js"></script>
+      <script async src="point.js"></script>
+      <script async src="poi.js"></script>
+      <script async src="bushaltestelle.js"></script>
+      <script async src="abgabe1.js"></script>
+      <script async src="abgabe2.js"></script>
+      <script async src="standort.js"></script>
+      <script async src="berechneDistanz.js"></script>
+
+      <div id="tabelle">  
+        <table border="2" id="innerTable">
+              <tr> 
+                  <td>dein Wunschstandpunkt:</td>
+                  <td> 
+                      <table>
+                              <tr>
+                                  <th>
+                                      lon
+                                  </th>
+                                  <th>
+                                      lat
+                                  </th>
+                              </TR>
+                              <tr>
+                                  <td>
+                                      <input type="text" id="text_lon" >
+                                  </td>
+                                  <td>
+                                      <input type="text" id="text_lat" >
+                                  </td>
+                              </tr>
+                      </table>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2">
+                      Eingabe als GeoJSON <BR>
+                      <textarea id="eingabe_geoJSON" rows="6" cols="50" >
+                      </textarea>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <button type="button" id="button_standort">Standort abfragen</button>
+                  </td>
+                  <td>
+                      <button type="submit" id="button_berechne">berechne</button>
+                      <button type="submit" id="button_berechne_geoJSON">berechne geoJSON</button>
+                      <button type="submit" id="button_aufgabe1">Aufgabe 1</button>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="1">
+                      <button type="button" id="button_clear">Clear all</button>
+                  </td>
+                  <td>
+                      <button type="button" id="button_titel">Seitentitel setzen</button>
+                      <button type="button" id="button_author">Autor setzen</button>
+                      <button type="button" id="button_description">Beschreibung setzen</button>
+                  </td>
+      
+                  
+              </tr>
+          </table> 
+      </div>
+      <br>
+      <div id="whereTheMagicHappens">
+
+      </div>
+      <br>
+      <footer>
+        <a href="impressum.html">Impressum </a>
+      </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
