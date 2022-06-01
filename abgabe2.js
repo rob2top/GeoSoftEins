@@ -4,8 +4,6 @@ var poiDistance = [];   //Array für Distanz beliebiger Punkt- PointOfInterest
 var pointsOf = [];      //Array für PointsOfInterest nach extraktion aus geoJSON
 var x_lat = document.getElementById("text_lat"); // Inhalt des longitude Textfeldes
 var x_lon = document.getElementById("text_lon"); // Inhalt des latitude Textfeldes
-var stand_lat;      //globale lat Koordinate
-var stand_lon;      //globale lon Koordinate
 var x_geoJSON = document.getElementById("eingabe_geoJSON"); //Inhalt des Textareas für geoJSON eingabe7
 var AKstandort = [stand_lat, stand_lon];
 
@@ -20,10 +18,6 @@ var AKstandort = [stand_lat, stand_lon];
 });
 
 
-/**
- * bei Klick auf den "Standort abfragen" Button, wird die Funktion "getLocation" ausgeführt und der Standort des Browsers abgefragt
- */
-document.getElementById("button_standort").addEventListener("click", ()=> getLocation());
 
 /**
  * bei Klick auf den "berechne geoJSON" Button wird die Funktion "textfeldParse" ausgeführt, bei dem die eingegebenen geoJSON Koordinaten eingelesen werden
@@ -100,7 +94,6 @@ function uebung2()
      stand_lon = object_geoJSON.geometry.coordinates[0];
      stand_lat = object_geoJSON.geometry.coordinates[1];
      uebung2();
- 
  }
  
  /**
@@ -123,30 +116,4 @@ function uebung2()
  }
 
  
- /**
- * fragt die Position des Browsers ab, prüft ob der Browser dies zulässt, gibt sonst default Wert an.
- * Wenn erlaubt, gibt er Position aus und weiter an shoPosition(), welche die Koordinaten in die Textfelder schreibt.
- */
- function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-      console.log("[Standort] gezogen");
-    } else {
-      x_lat.value = "Geolocation is not "; //falls nicht erlaubt, alternativtext um exception zu fangen 
-      x_lon.value = "supported by this browser.";
-      console.log("[Standort] errror]");
-    }
-  }
-  
-  /**
-   * schreibt die Koordinaten des Browsers in die "globalen lat/lon" Variablen und damit in die Textfelder
-   * @param {*} position 
-   */
-   function showPosition(position) {
-    x_lat.value = position.coords.latitude;
-    x_lon.value = position.coords.longitude;
-    stand_lat = x_lat.value;
-    stand_lon = x_lon.value;
-    console.log("[Standort] eingetragen");
-    printMap(stand_lat, stand_lon);
-  }
+ 

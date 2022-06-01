@@ -2,7 +2,7 @@
     height: 500px;
     width: 750px; 
     float: left;
-    margin-left: 50px;
+    margin-left: 10px;
     border: 1px solid black;
 }
 
@@ -10,6 +10,11 @@
     float: left;
     max-height: 500px;
     overflow-y: scroll;
+}
+
+#buttonDiv{
+    margin-left: 10px;
+    float: left;
 }
 
 #body{

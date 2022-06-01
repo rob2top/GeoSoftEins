@@ -13,6 +13,8 @@ var poly;    // variable für den Turf.polygon
 var markerArray = [];   // Array, in dem alle Marker gespeichert werden, damit sie auch wieder einzeln gelöscht /removed werden können
 
 
+document.getElementById("button_bushalte").addEventListener("click", ()=> printMap(stand_lat, stand_lon));
+
 /**
  * 
  * Funktion erstellt alle Marker auf der Karte.
@@ -206,6 +208,10 @@ map.on(L.Draw.Event.CREATED, function (e) {
         if(turf.booleanPointInPolygon(turf.point([pt.lat,pt.lng]),poly)== false){
             map.removeLayer(element);
         }
+        if(turf.booleanPointInPolygon(turf.point([pt.lat,pt.lng]),poly)== true){
+
+        }
+
     })
     pt = turf.point();
    
